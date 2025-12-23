@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Header } from '@/components/Header';
+import { AnimatedBackground } from '@/components/AnimatedBackground';
 import { Input } from '@/components/ui/input';
 import { Search, Droplets, Sun, Calendar, Sprout } from 'lucide-react';
 
@@ -136,10 +137,11 @@ export const CropAdvisory: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-hero">
+    <div className="min-h-screen relative">
+      <AnimatedBackground />
       <Header showBack />
 
-      <main className="container px-4 py-6">
+      <main className="relative z-10 container px-4 py-6">
         {/* Header */}
         <motion.div
           className="text-center mb-8"
