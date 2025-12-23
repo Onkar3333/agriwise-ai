@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Header } from '@/components/Header';
+import { AnimatedBackground } from '@/components/AnimatedBackground';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Send, Image, Users, User, Plus, Hash } from 'lucide-react';
@@ -76,7 +77,8 @@ export const FarmerChat: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-hero flex flex-col">
+    <div className="min-h-screen relative flex flex-col">
+      <AnimatedBackground />
       <Header showBack />
 
       <div className="flex-1 flex overflow-hidden">

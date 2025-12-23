@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Header } from '@/components/Header';
+import { AnimatedBackground } from '@/components/AnimatedBackground';
 import { Button } from '@/components/ui/button';
 import { Camera, Upload, Loader2, AlertCircle, CheckCircle, Save, X } from 'lucide-react';
 import { toast } from 'sonner';
@@ -86,10 +87,11 @@ export const DiseaseDetection: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-hero">
+    <div className="min-h-screen relative">
+      <AnimatedBackground />
       <Header showBack />
 
-      <main className="container px-4 py-6">
+      <main className="relative z-10 container px-4 py-6">
         {/* Header */}
         <motion.div
           className="text-center mb-8"
