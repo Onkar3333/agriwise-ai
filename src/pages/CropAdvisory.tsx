@@ -1,176 +1,16 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Header } from '@/components/Header';
 import { AnimatedBackground } from '@/components/AnimatedBackground';
 import { Input } from '@/components/ui/input';
-import { Search, Droplets, Sun, Calendar, Sprout } from 'lucide-react';
-
-// Import crop images
-import riceImg from '@/assets/crops/rice.jpg';
-import soybeanImg from '@/assets/crops/soybean.jpg';
-import cottonImg from '@/assets/crops/cotton.jpg';
-import wheatImg from '@/assets/crops/wheat.jpg';
-import chickpeaImg from '@/assets/crops/chickpea.jpg';
-import onionImg from '@/assets/crops/onion.jpg';
-import groundnutImg from '@/assets/crops/groundnut.jpg';
-import watermelonImg from '@/assets/crops/watermelon.jpg';
-import sugarcaneImg from '@/assets/crops/sugarcane.jpg';
-import tomatoImg from '@/assets/crops/tomato.jpg';
-import grapesImg from '@/assets/crops/grapes.jpg';
-import pomegranateImg from '@/assets/crops/pomegranate.jpg';
-
-type CropSeason = 'all' | 'kharif' | 'rabi' | 'summer';
-
-interface Crop {
-  id: string;
-  name: { en: string; mr: string; hi: string };
-  season: 'kharif' | 'rabi' | 'summer';
-  sowingPeriod: string;
-  harvestPeriod: string;
-  soilType: string;
-  waterNeeds: 'Low' | 'Medium' | 'High';
-  yield: string;
-  image: string;
-}
-
-const cropsData: Crop[] = [
-  {
-    id: '1',
-    name: { en: 'Rice (Paddy)', mr: 'भात (धान)', hi: 'चावल (धान)' },
-    season: 'kharif',
-    sowingPeriod: 'June - July',
-    harvestPeriod: 'October - November',
-    soilType: 'Clay Loam, Alluvial',
-    waterNeeds: 'High',
-    yield: '35-45 quintals/hectare',
-    image: riceImg,
-  },
-  {
-    id: '2',
-    name: { en: 'Soybean', mr: 'सोयाबीन', hi: 'सोयाबीन' },
-    season: 'kharif',
-    sowingPeriod: 'June - July',
-    harvestPeriod: 'September - October',
-    soilType: 'Black, Sandy Loam',
-    waterNeeds: 'Medium',
-    yield: '20-25 quintals/hectare',
-    image: soybeanImg,
-  },
-  {
-    id: '3',
-    name: { en: 'Cotton', mr: 'कापूस', hi: 'कपास' },
-    season: 'kharif',
-    sowingPeriod: 'May - June',
-    harvestPeriod: 'October - December',
-    soilType: 'Black Cotton Soil',
-    waterNeeds: 'Medium',
-    yield: '15-20 quintals/hectare',
-    image: cottonImg,
-  },
-  {
-    id: '4',
-    name: { en: 'Wheat', mr: 'गहू', hi: 'गेहूं' },
-    season: 'rabi',
-    sowingPeriod: 'October - November',
-    harvestPeriod: 'March - April',
-    soilType: 'Loamy, Clay Loam',
-    waterNeeds: 'Medium',
-    yield: '40-50 quintals/hectare',
-    image: wheatImg,
-  },
-  {
-    id: '5',
-    name: { en: 'Gram (Chickpea)', mr: 'हरभरा', hi: 'चना' },
-    season: 'rabi',
-    sowingPeriod: 'October - November',
-    harvestPeriod: 'February - March',
-    soilType: 'Sandy Loam, Clay',
-    waterNeeds: 'Low',
-    yield: '15-20 quintals/hectare',
-    image: chickpeaImg,
-  },
-  {
-    id: '6',
-    name: { en: 'Onion', mr: 'कांदा', hi: 'प्याज' },
-    season: 'rabi',
-    sowingPeriod: 'November - December',
-    harvestPeriod: 'April - May',
-    soilType: 'Sandy Loam',
-    waterNeeds: 'Medium',
-    yield: '250-300 quintals/hectare',
-    image: onionImg,
-  },
-  {
-    id: '7',
-    name: { en: 'Groundnut', mr: 'भुईमूग', hi: 'मूंगफली' },
-    season: 'summer',
-    sowingPeriod: 'January - February',
-    harvestPeriod: 'April - May',
-    soilType: 'Sandy Loam, Red',
-    waterNeeds: 'Medium',
-    yield: '20-25 quintals/hectare',
-    image: groundnutImg,
-  },
-  {
-    id: '8',
-    name: { en: 'Watermelon', mr: 'कलिंगड', hi: 'तरबूज' },
-    season: 'summer',
-    sowingPeriod: 'January - February',
-    harvestPeriod: 'April - May',
-    soilType: 'Sandy, Well-drained',
-    waterNeeds: 'High',
-    yield: '300-400 quintals/hectare',
-    image: watermelonImg,
-  },
-  {
-    id: '9',
-    name: { en: 'Sugarcane', mr: 'ऊस', hi: 'गन्ना' },
-    season: 'kharif',
-    sowingPeriod: 'February - March',
-    harvestPeriod: 'December - March',
-    soilType: 'Deep Loam, Clay Loam',
-    waterNeeds: 'High',
-    yield: '800-1000 quintals/hectare',
-    image: sugarcaneImg,
-  },
-  {
-    id: '10',
-    name: { en: 'Tomato', mr: 'टोमॅटो', hi: 'टमाटर' },
-    season: 'rabi',
-    sowingPeriod: 'September - October',
-    harvestPeriod: 'January - March',
-    soilType: 'Sandy Loam, Red',
-    waterNeeds: 'Medium',
-    yield: '250-350 quintals/hectare',
-    image: tomatoImg,
-  },
-  {
-    id: '11',
-    name: { en: 'Grapes', mr: 'द्राक्षे', hi: 'अंगूर' },
-    season: 'summer',
-    sowingPeriod: 'January - February',
-    harvestPeriod: 'March - May',
-    soilType: 'Well-drained Sandy Loam',
-    waterNeeds: 'Medium',
-    yield: '200-300 quintals/hectare',
-    image: grapesImg,
-  },
-  {
-    id: '12',
-    name: { en: 'Pomegranate', mr: 'डाळिंब', hi: 'अनार' },
-    season: 'summer',
-    sowingPeriod: 'June - July',
-    harvestPeriod: 'January - February',
-    soilType: 'Sandy Loam, Black',
-    waterNeeds: 'Low',
-    yield: '100-150 quintals/hectare',
-    image: pomegranateImg,
-  },
-];
+import { Search, Droplets, Sun, Calendar, Sprout, ChevronRight } from 'lucide-react';
+import { cropsData, CropSeason } from '@/data/cropsData';
 
 export const CropAdvisory: React.FC = () => {
   const { t, language } = useLanguage();
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedSeason, setSelectedSeason] = useState<CropSeason>('all');
 
@@ -260,6 +100,7 @@ export const CropAdvisory: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.05 }}
+              onClick={() => navigate(`/crops/${crop.id}`)}
             >
               {/* Crop Image */}
               <div className="relative h-48 overflow-hidden">
@@ -276,10 +117,13 @@ export const CropAdvisory: React.FC = () => {
                 }`}>
                   {t(`crops.${crop.season}`)}
                 </span>
-                <div className="absolute bottom-4 left-4">
+                <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
                   <h3 className="font-bold text-foreground text-xl drop-shadow-lg">
                     {crop.name[language]}
                   </h3>
+                  <div className="w-8 h-8 rounded-full bg-primary/20 backdrop-blur flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <ChevronRight className="w-5 h-5 text-primary" />
+                  </div>
                 </div>
               </div>
 
@@ -316,9 +160,12 @@ export const CropAdvisory: React.FC = () => {
                   </span>
                 </div>
 
-                <div className="pt-3 border-t border-border">
-                  <div className="text-xs text-muted-foreground">{t('crops.yield')}</div>
-                  <div className="text-sm font-bold text-gradient">{crop.yield}</div>
+                <div className="pt-3 border-t border-border flex items-center justify-between">
+                  <div>
+                    <div className="text-xs text-muted-foreground">{t('crops.yield')}</div>
+                    <div className="text-sm font-bold text-gradient">{crop.yield}</div>
+                  </div>
+                  <span className="text-xs text-primary font-medium group-hover:underline">View Details →</span>
                 </div>
               </div>
             </motion.div>

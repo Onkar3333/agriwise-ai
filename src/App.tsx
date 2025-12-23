@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import CropAdvisory from "./pages/CropAdvisory";
+import CropDetail from "./pages/CropDetail";
 import DiseaseDetection from "./pages/DiseaseDetection";
 import Recommendations from "./pages/Recommendations";
 import NearbyMarkets from "./pages/NearbyMarkets";
@@ -29,6 +30,7 @@ const App = () => (
             <Route path="/auth" element={<Auth />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/crops" element={<CropAdvisory />} />
+            <Route path="/crops/:id" element={<CropDetail />} />
             <Route path="/disease-detection" element={<DiseaseDetection />} />
             <Route path="/recommendations" element={<Recommendations />} />
             <Route path="/markets" element={<NearbyMarkets />} />
