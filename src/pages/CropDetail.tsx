@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Header } from '@/components/Header';
 import { AnimatedBackground } from '@/components/AnimatedBackground';
+import { CropPriceChart } from '@/components/CropPriceChart';
 import { cropsData } from '@/data/cropsData';
 import { Droplets, Sun, Calendar, Sprout, FlaskConical, Bug, Waves, Lightbulb, ArrowLeft, ChevronRight } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -198,6 +199,15 @@ export const CropDetail: React.FC = () => {
             </TabsContent>
           </Tabs>
         </motion.div>
+
+        {/* Price Trends Chart */}
+        <div className="mt-6">
+          <CropPriceChart
+            priceHistory={crop.priceHistory}
+            unit={crop.priceUnit}
+            cropName={crop.name[language]}
+          />
+        </div>
 
         {/* Pro Tips */}
         <motion.div
