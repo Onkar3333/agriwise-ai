@@ -5,6 +5,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Header } from '@/components/Header';
 import { DashboardCard } from '@/components/DashboardCard';
 import { AnimatedBackground } from '@/components/AnimatedBackground';
+import { WeatherWidget } from '@/components/WeatherWidget';
 import { 
   Sprout, 
   Search, 
@@ -79,29 +80,37 @@ export const Dashboard: React.FC = () => {
       <Header showBack showLogout />
 
       <main className="relative z-10 container px-4 py-8">
-        {/* Welcome Section */}
-        <motion.div
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
+        {/* Welcome Section with Weather */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
+          {/* Welcome Text */}
           <motion.div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2 }}
+            className="lg:col-span-2"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
           >
-            <Zap className="w-4 h-4" />
-            AI-Powered Agriculture Platform
+            <motion.div
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2 }}
+            >
+              <Zap className="w-4 h-4" />
+              AI-Powered Agriculture Platform
+            </motion.div>
+            <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-4 font-display">
+              {t('dashboard.welcome')} <span className="inline-block animate-float">👋</span>
+            </h1>
+            <p className="text-lg text-muted-foreground max-w-2xl">
+              {t('dashboard.subtitle')}
+            </p>
           </motion.div>
-          <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-4 font-display">
-            {t('dashboard.welcome')} <span className="inline-block animate-float">👋</span>
-          </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            {t('dashboard.subtitle')}
-          </p>
-        </motion.div>
+
+          {/* Weather Widget */}
+          <div className="lg:col-span-1">
+            <WeatherWidget />
+          </div>
+        </div>
 
         {/* Quick Stats */}
         <motion.div
