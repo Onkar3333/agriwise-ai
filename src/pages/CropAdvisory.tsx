@@ -6,6 +6,16 @@ import { AnimatedBackground } from '@/components/AnimatedBackground';
 import { Input } from '@/components/ui/input';
 import { Search, Droplets, Sun, Calendar, Sprout } from 'lucide-react';
 
+// Import crop images
+import riceImg from '@/assets/crops/rice.jpg';
+import soybeanImg from '@/assets/crops/soybean.jpg';
+import cottonImg from '@/assets/crops/cotton.jpg';
+import wheatImg from '@/assets/crops/wheat.jpg';
+import chickpeaImg from '@/assets/crops/chickpea.jpg';
+import onionImg from '@/assets/crops/onion.jpg';
+import groundnutImg from '@/assets/crops/groundnut.jpg';
+import watermelonImg from '@/assets/crops/watermelon.jpg';
+
 type CropSeason = 'all' | 'kharif' | 'rabi' | 'summer';
 
 interface Crop {
@@ -17,7 +27,7 @@ interface Crop {
   soilType: string;
   waterNeeds: 'Low' | 'Medium' | 'High';
   yield: string;
-  icon: string;
+  image: string;
 }
 
 const cropsData: Crop[] = [
@@ -30,7 +40,7 @@ const cropsData: Crop[] = [
     soilType: 'Clay Loam, Alluvial',
     waterNeeds: 'High',
     yield: '35-45 quintals/hectare',
-    icon: '🌾',
+    image: riceImg,
   },
   {
     id: '2',
@@ -41,7 +51,7 @@ const cropsData: Crop[] = [
     soilType: 'Black, Sandy Loam',
     waterNeeds: 'Medium',
     yield: '20-25 quintals/hectare',
-    icon: '🫘',
+    image: soybeanImg,
   },
   {
     id: '3',
@@ -52,7 +62,7 @@ const cropsData: Crop[] = [
     soilType: 'Black Cotton Soil',
     waterNeeds: 'Medium',
     yield: '15-20 quintals/hectare',
-    icon: '🌿',
+    image: cottonImg,
   },
   {
     id: '4',
@@ -63,7 +73,7 @@ const cropsData: Crop[] = [
     soilType: 'Loamy, Clay Loam',
     waterNeeds: 'Medium',
     yield: '40-50 quintals/hectare',
-    icon: '🌾',
+    image: wheatImg,
   },
   {
     id: '5',
@@ -74,7 +84,7 @@ const cropsData: Crop[] = [
     soilType: 'Sandy Loam, Clay',
     waterNeeds: 'Low',
     yield: '15-20 quintals/hectare',
-    icon: '🫛',
+    image: chickpeaImg,
   },
   {
     id: '6',
@@ -85,7 +95,7 @@ const cropsData: Crop[] = [
     soilType: 'Sandy Loam',
     waterNeeds: 'Medium',
     yield: '250-300 quintals/hectare',
-    icon: '🧅',
+    image: onionImg,
   },
   {
     id: '7',
@@ -96,7 +106,7 @@ const cropsData: Crop[] = [
     soilType: 'Sandy Loam, Red',
     waterNeeds: 'Medium',
     yield: '20-25 quintals/hectare',
-    icon: '🥜',
+    image: groundnutImg,
   },
   {
     id: '8',
@@ -107,7 +117,7 @@ const cropsData: Crop[] = [
     soilType: 'Sandy, Well-drained',
     waterNeeds: 'High',
     yield: '300-400 quintals/hectare',
-    icon: '🍉',
+    image: watermelonImg,
   },
 ];
 
@@ -131,9 +141,9 @@ export const CropAdvisory: React.FC = () => {
   });
 
   const waterNeedsColor = {
-    Low: 'text-emerald-glow',
+    Low: 'text-primary',
     Medium: 'text-accent',
-    High: 'text-primary',
+    High: 'text-secondary',
   };
 
   return (
@@ -184,7 +194,7 @@ export const CropAdvisory: React.FC = () => {
               onClick={() => setSelectedSeason(season.value)}
               className={`px-5 py-2.5 rounded-xl text-sm font-semibold whitespace-nowrap transition-all ${
                 selectedSeason === season.value
-                  ? 'bg-primary text-primary-foreground shadow-md'
+                  ? 'bg-primary text-primary-foreground shadow-md glow-primary'
                   : 'glass text-foreground hover:bg-muted'
               }`}
             >
@@ -194,67 +204,74 @@ export const CropAdvisory: React.FC = () => {
         </motion.div>
 
         {/* Crops Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredCrops.map((crop, index) => (
             <motion.div
               key={crop.id}
-              className="glass-card p-5 card-hover cursor-pointer"
+              className="glass-card overflow-hidden card-hover cursor-pointer group"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.05 }}
             >
-              <div className="flex items-start gap-4 mb-4">
-                <div className="text-4xl">{crop.icon}</div>
-                <div>
-                  <h3 className="font-bold text-foreground text-lg">
+              {/* Crop Image */}
+              <div className="relative h-48 overflow-hidden">
+                <img 
+                  src={crop.image} 
+                  alt={crop.name.en}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent" />
+                <span className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold backdrop-blur ${
+                  crop.season === 'kharif' ? 'bg-primary/20 text-primary border border-primary/30' :
+                  crop.season === 'rabi' ? 'bg-accent/20 text-accent border border-accent/30' :
+                  'bg-secondary/20 text-secondary border border-secondary/30'
+                }`}>
+                  {t(`crops.${crop.season}`)}
+                </span>
+                <div className="absolute bottom-4 left-4">
+                  <h3 className="font-bold text-foreground text-xl drop-shadow-lg">
                     {crop.name[language]}
                   </h3>
-                  <span className={`inline-block px-2 py-0.5 rounded-full text-xs font-medium mt-1 ${
-                    crop.season === 'kharif' ? 'bg-primary/10 text-primary' :
-                    crop.season === 'rabi' ? 'bg-accent/10 text-accent' :
-                    'bg-secondary text-secondary-foreground'
-                  }`}>
-                    {t(`crops.${crop.season}`)}
+                </div>
+              </div>
+
+              {/* Crop Details */}
+              <div className="p-5 space-y-3">
+                <div className="grid grid-cols-2 gap-3 text-sm">
+                  <div className="flex items-center gap-2">
+                    <Calendar className="w-4 h-4 text-primary" />
+                    <div>
+                      <span className="text-muted-foreground text-xs block">{t('crops.sowingPeriod')}</span>
+                      <span className="text-foreground font-medium">{crop.sowingPeriod}</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Sun className="w-4 h-4 text-accent" />
+                    <div>
+                      <span className="text-muted-foreground text-xs block">{t('crops.harvestPeriod')}</span>
+                      <span className="text-foreground font-medium">{crop.harvestPeriod}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 text-sm">
+                  <Sprout className="w-4 h-4 text-primary" />
+                  <span className="text-muted-foreground">{t('crops.soilType')}:</span>
+                  <span className="text-foreground font-medium">{crop.soilType}</span>
+                </div>
+
+                <div className="flex items-center gap-2 text-sm">
+                  <Droplets className={`w-4 h-4 ${waterNeedsColor[crop.waterNeeds]}`} />
+                  <span className="text-muted-foreground">{t('crops.waterNeeds')}:</span>
+                  <span className={`font-semibold ${waterNeedsColor[crop.waterNeeds]}`}>
+                    {crop.waterNeeds}
                   </span>
                 </div>
-              </div>
 
-              <div className="space-y-3 text-sm">
-                <div className="flex items-center gap-3">
-                  <Calendar className="w-4 h-4 text-primary" />
-                  <div>
-                    <span className="text-muted-foreground">{t('crops.sowingPeriod')}:</span>
-                    <span className="ml-2 text-foreground font-medium">{crop.sowingPeriod}</span>
-                  </div>
+                <div className="pt-3 border-t border-border">
+                  <div className="text-xs text-muted-foreground">{t('crops.yield')}</div>
+                  <div className="text-sm font-bold text-gradient">{crop.yield}</div>
                 </div>
-                <div className="flex items-center gap-3">
-                  <Sun className="w-4 h-4 text-accent" />
-                  <div>
-                    <span className="text-muted-foreground">{t('crops.harvestPeriod')}:</span>
-                    <span className="ml-2 text-foreground font-medium">{crop.harvestPeriod}</span>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Sprout className="w-4 h-4 text-earth-warm" />
-                  <div>
-                    <span className="text-muted-foreground">{t('crops.soilType')}:</span>
-                    <span className="ml-2 text-foreground font-medium">{crop.soilType}</span>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Droplets className={`w-4 h-4 ${waterNeedsColor[crop.waterNeeds]}`} />
-                  <div>
-                    <span className="text-muted-foreground">{t('crops.waterNeeds')}:</span>
-                    <span className={`ml-2 font-medium ${waterNeedsColor[crop.waterNeeds]}`}>
-                      {crop.waterNeeds}
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-4 pt-4 border-t border-border">
-                <div className="text-xs text-muted-foreground">{t('crops.yield')}</div>
-                <div className="text-sm font-semibold text-gradient">{crop.yield}</div>
               </div>
             </motion.div>
           ))}
