@@ -15,6 +15,10 @@ import chickpeaImg from '@/assets/crops/chickpea.jpg';
 import onionImg from '@/assets/crops/onion.jpg';
 import groundnutImg from '@/assets/crops/groundnut.jpg';
 import watermelonImg from '@/assets/crops/watermelon.jpg';
+import sugarcaneImg from '@/assets/crops/sugarcane.jpg';
+import tomatoImg from '@/assets/crops/tomato.jpg';
+import grapesImg from '@/assets/crops/grapes.jpg';
+import pomegranateImg from '@/assets/crops/pomegranate.jpg';
 
 type CropSeason = 'all' | 'kharif' | 'rabi' | 'summer';
 
@@ -118,6 +122,50 @@ const cropsData: Crop[] = [
     waterNeeds: 'High',
     yield: '300-400 quintals/hectare',
     image: watermelonImg,
+  },
+  {
+    id: '9',
+    name: { en: 'Sugarcane', mr: 'ऊस', hi: 'गन्ना' },
+    season: 'kharif',
+    sowingPeriod: 'February - March',
+    harvestPeriod: 'December - March',
+    soilType: 'Deep Loam, Clay Loam',
+    waterNeeds: 'High',
+    yield: '800-1000 quintals/hectare',
+    image: sugarcaneImg,
+  },
+  {
+    id: '10',
+    name: { en: 'Tomato', mr: 'टोमॅटो', hi: 'टमाटर' },
+    season: 'rabi',
+    sowingPeriod: 'September - October',
+    harvestPeriod: 'January - March',
+    soilType: 'Sandy Loam, Red',
+    waterNeeds: 'Medium',
+    yield: '250-350 quintals/hectare',
+    image: tomatoImg,
+  },
+  {
+    id: '11',
+    name: { en: 'Grapes', mr: 'द्राक्षे', hi: 'अंगूर' },
+    season: 'summer',
+    sowingPeriod: 'January - February',
+    harvestPeriod: 'March - May',
+    soilType: 'Well-drained Sandy Loam',
+    waterNeeds: 'Medium',
+    yield: '200-300 quintals/hectare',
+    image: grapesImg,
+  },
+  {
+    id: '12',
+    name: { en: 'Pomegranate', mr: 'डाळिंब', hi: 'अनार' },
+    season: 'summer',
+    sowingPeriod: 'June - July',
+    harvestPeriod: 'January - February',
+    soilType: 'Sandy Loam, Black',
+    waterNeeds: 'Low',
+    yield: '100-150 quintals/hectare',
+    image: pomegranateImg,
   },
 ];
 
