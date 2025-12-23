@@ -35,6 +35,12 @@ export interface IrrigationStage {
   tips: string;
 }
 
+export interface PriceData {
+  month: string;
+  price: number;
+  year: number;
+}
+
 export interface Crop {
   id: string;
   name: { en: string; mr: string; hi: string };
@@ -50,6 +56,8 @@ export interface Crop {
   pests: Pest[];
   irrigation: IrrigationStage[];
   tips: string[];
+  priceHistory: PriceData[];
+  priceUnit: string;
 }
 
 export const cropsData: Crop[] = [
@@ -85,7 +93,22 @@ export const cropsData: Crop[] = [
       { stage: 'Tillering', frequency: 'Every 3-4 days', method: 'Alternate wetting/drying', tips: 'Critical stage for water' },
       { stage: 'Flowering', frequency: 'Continuous', method: 'Flooded', tips: 'Never stress during flowering' }
     ],
-    tips: ['Use certified seeds from reliable sources', 'Maintain proper plant spacing of 20x15 cm', 'Apply weedicide 3-5 days after transplanting', 'Harvest when 80% grains are golden']
+    tips: ['Use certified seeds from reliable sources', 'Maintain proper plant spacing of 20x15 cm', 'Apply weedicide 3-5 days after transplanting', 'Harvest when 80% grains are golden'],
+    priceHistory: [
+      { month: 'Jan', price: 2100, year: 2024 },
+      { month: 'Feb', price: 2150, year: 2024 },
+      { month: 'Mar', price: 2200, year: 2024 },
+      { month: 'Apr', price: 2180, year: 2024 },
+      { month: 'May', price: 2250, year: 2024 },
+      { month: 'Jun', price: 2300, year: 2024 },
+      { month: 'Jul', price: 2280, year: 2024 },
+      { month: 'Aug', price: 2350, year: 2024 },
+      { month: 'Sep', price: 2400, year: 2024 },
+      { month: 'Oct', price: 2450, year: 2024 },
+      { month: 'Nov', price: 2380, year: 2024 },
+      { month: 'Dec', price: 2420, year: 2024 },
+    ],
+    priceUnit: 'per quintal',
   },
   {
     id: '2',
@@ -117,7 +140,22 @@ export const cropsData: Crop[] = [
       { stage: 'Flowering', frequency: 'Every 10-12 days', method: 'Furrow irrigation', tips: 'Critical stage - avoid water stress' },
       { stage: 'Pod filling', frequency: 'Every 12-15 days', method: 'Furrow irrigation', tips: 'Moderate irrigation needed' }
     ],
-    tips: ['Treat seeds with Thiram before sowing', 'Maintain row spacing of 45 cm', 'Intercropping with pigeon pea is beneficial', 'Harvest when leaves turn yellow and fall']
+    tips: ['Treat seeds with Thiram before sowing', 'Maintain row spacing of 45 cm', 'Intercropping with pigeon pea is beneficial', 'Harvest when leaves turn yellow and fall'],
+    priceHistory: [
+      { month: 'Jan', price: 4500, year: 2024 },
+      { month: 'Feb', price: 4650, year: 2024 },
+      { month: 'Mar', price: 4800, year: 2024 },
+      { month: 'Apr', price: 4750, year: 2024 },
+      { month: 'May', price: 4600, year: 2024 },
+      { month: 'Jun', price: 4400, year: 2024 },
+      { month: 'Jul', price: 4300, year: 2024 },
+      { month: 'Aug', price: 4550, year: 2024 },
+      { month: 'Sep', price: 4700, year: 2024 },
+      { month: 'Oct', price: 4900, year: 2024 },
+      { month: 'Nov', price: 5100, year: 2024 },
+      { month: 'Dec', price: 5250, year: 2024 },
+    ],
+    priceUnit: 'per quintal',
   },
   {
     id: '3',
@@ -150,7 +188,22 @@ export const cropsData: Crop[] = [
       { stage: 'Flowering', frequency: 'Every 10-12 days', method: 'Furrow/Drip', tips: 'Critical stage - maintain moisture' },
       { stage: 'Boll development', frequency: 'Every 12-15 days', method: 'Drip preferred', tips: 'Reduce frequency near harvest' }
     ],
-    tips: ['Use high-density planting system for better yields', 'Remove and destroy affected plant parts regularly', 'Apply growth regulators for compact plant architecture', 'Pick cotton at regular intervals when bolls burst']
+    tips: ['Use high-density planting system for better yields', 'Remove and destroy affected plant parts regularly', 'Apply growth regulators for compact plant architecture', 'Pick cotton at regular intervals when bolls burst'],
+    priceHistory: [
+      { month: 'Jan', price: 6500, year: 2024 },
+      { month: 'Feb', price: 6800, year: 2024 },
+      { month: 'Mar', price: 7100, year: 2024 },
+      { month: 'Apr', price: 7300, year: 2024 },
+      { month: 'May', price: 7000, year: 2024 },
+      { month: 'Jun', price: 6700, year: 2024 },
+      { month: 'Jul', price: 6400, year: 2024 },
+      { month: 'Aug', price: 6600, year: 2024 },
+      { month: 'Sep', price: 6900, year: 2024 },
+      { month: 'Oct', price: 7200, year: 2024 },
+      { month: 'Nov', price: 7500, year: 2024 },
+      { month: 'Dec', price: 7350, year: 2024 },
+    ],
+    priceUnit: 'per quintal',
   },
   {
     id: '4',
@@ -183,7 +236,22 @@ export const cropsData: Crop[] = [
       { stage: 'Flowering', frequency: '60-65 DAS', method: 'Flood', tips: 'Do not skip this irrigation' },
       { stage: 'Grain filling', frequency: '80-85 DAS', method: 'Light irrigation', tips: 'Avoid water logging' }
     ],
-    tips: ['Sow within optimum date for best yields', 'Use seed rate of 100-125 kg/hectare', 'Apply first irrigation 20-25 days after sowing', 'Harvest when grain moisture is 12-14%']
+    tips: ['Sow within optimum date for best yields', 'Use seed rate of 100-125 kg/hectare', 'Apply first irrigation 20-25 days after sowing', 'Harvest when grain moisture is 12-14%'],
+    priceHistory: [
+      { month: 'Jan', price: 2200, year: 2024 },
+      { month: 'Feb', price: 2280, year: 2024 },
+      { month: 'Mar', price: 2350, year: 2024 },
+      { month: 'Apr', price: 2400, year: 2024 },
+      { month: 'May', price: 2380, year: 2024 },
+      { month: 'Jun', price: 2300, year: 2024 },
+      { month: 'Jul', price: 2250, year: 2024 },
+      { month: 'Aug', price: 2320, year: 2024 },
+      { month: 'Sep', price: 2380, year: 2024 },
+      { month: 'Oct', price: 2450, year: 2024 },
+      { month: 'Nov', price: 2500, year: 2024 },
+      { month: 'Dec', price: 2550, year: 2024 },
+    ],
+    priceUnit: 'per quintal',
   },
   {
     id: '5',
@@ -215,7 +283,22 @@ export const cropsData: Crop[] = [
       { stage: 'Branching', frequency: 'If needed', method: 'Light irrigation', tips: 'Usually rainfed crop' },
       { stage: 'Pod formation', frequency: 'Critical', method: 'Sprinkler preferred', tips: 'One irrigation if dry spell' }
     ],
-    tips: ['Gram is mostly grown rainfed', 'Avoid excessive watering - causes disease', 'Use wilt-resistant varieties in endemic areas', 'Harvest when 80% pods turn brown']
+    tips: ['Gram is mostly grown rainfed', 'Avoid excessive watering - causes disease', 'Use wilt-resistant varieties in endemic areas', 'Harvest when 80% pods turn brown'],
+    priceHistory: [
+      { month: 'Jan', price: 5200, year: 2024 },
+      { month: 'Feb', price: 5400, year: 2024 },
+      { month: 'Mar', price: 5600, year: 2024 },
+      { month: 'Apr', price: 5800, year: 2024 },
+      { month: 'May', price: 5700, year: 2024 },
+      { month: 'Jun', price: 5500, year: 2024 },
+      { month: 'Jul', price: 5300, year: 2024 },
+      { month: 'Aug', price: 5400, year: 2024 },
+      { month: 'Sep', price: 5550, year: 2024 },
+      { month: 'Oct', price: 5700, year: 2024 },
+      { month: 'Nov', price: 5850, year: 2024 },
+      { month: 'Dec', price: 5950, year: 2024 },
+    ],
+    priceUnit: 'per quintal',
   },
   {
     id: '6',
@@ -249,7 +332,22 @@ export const cropsData: Crop[] = [
       { stage: 'Bulb development', frequency: 'Every 10 days', method: 'Drip', tips: 'Critical for bulb size' },
       { stage: 'Before harvest', frequency: 'Stop 10-15 days before', method: '-', tips: 'Improves storage quality' }
     ],
-    tips: ['Use raised beds for better drainage', 'Maintain 15x10 cm spacing for large bulbs', 'Stop irrigation 15 days before harvest', 'Cure bulbs properly before storage']
+    tips: ['Use raised beds for better drainage', 'Maintain 15x10 cm spacing for large bulbs', 'Stop irrigation 15 days before harvest', 'Cure bulbs properly before storage'],
+    priceHistory: [
+      { month: 'Jan', price: 1800, year: 2024 },
+      { month: 'Feb', price: 2200, year: 2024 },
+      { month: 'Mar', price: 2800, year: 2024 },
+      { month: 'Apr', price: 3200, year: 2024 },
+      { month: 'May', price: 2500, year: 2024 },
+      { month: 'Jun', price: 2100, year: 2024 },
+      { month: 'Jul', price: 2400, year: 2024 },
+      { month: 'Aug', price: 3000, year: 2024 },
+      { month: 'Sep', price: 3500, year: 2024 },
+      { month: 'Oct', price: 2800, year: 2024 },
+      { month: 'Nov', price: 2200, year: 2024 },
+      { month: 'Dec', price: 1900, year: 2024 },
+    ],
+    priceUnit: 'per quintal',
   },
   {
     id: '7',
@@ -282,7 +380,22 @@ export const cropsData: Crop[] = [
       { stage: 'Pegging', frequency: 'Every 10-12 days', method: 'Light irrigation', tips: 'Keep soil loose' },
       { stage: 'Pod development', frequency: 'Every 10 days', method: 'Reduce gradually', tips: 'Stop 15 days before harvest' }
     ],
-    tips: ['Apply gypsum at flowering for better pod filling', 'Earthing up promotes peg penetration', 'Maintain loose soil for easy pegging', 'Harvest when 75% pods are mature']
+    tips: ['Apply gypsum at flowering for better pod filling', 'Earthing up promotes peg penetration', 'Maintain loose soil for easy pegging', 'Harvest when 75% pods are mature'],
+    priceHistory: [
+      { month: 'Jan', price: 5800, year: 2024 },
+      { month: 'Feb', price: 5950, year: 2024 },
+      { month: 'Mar', price: 6100, year: 2024 },
+      { month: 'Apr', price: 6300, year: 2024 },
+      { month: 'May', price: 6500, year: 2024 },
+      { month: 'Jun', price: 6200, year: 2024 },
+      { month: 'Jul', price: 5900, year: 2024 },
+      { month: 'Aug', price: 5750, year: 2024 },
+      { month: 'Sep', price: 5850, year: 2024 },
+      { month: 'Oct', price: 6000, year: 2024 },
+      { month: 'Nov', price: 6150, year: 2024 },
+      { month: 'Dec', price: 6250, year: 2024 },
+    ],
+    priceUnit: 'per quintal',
   },
   {
     id: '8',
@@ -315,7 +428,22 @@ export const cropsData: Crop[] = [
       { stage: 'Fruit development', frequency: 'Every 2-3 days', method: 'Drip', tips: 'Consistent water for even fruit' },
       { stage: 'Ripening', frequency: 'Reduce frequency', method: 'Light irrigation', tips: 'Less water increases sweetness' }
     ],
-    tips: ['Use black plastic mulch for weed control', 'Train vines in one direction', 'Place straw under fruits to prevent soil contact', 'Thump test - ripe fruits sound hollow']
+    tips: ['Use black plastic mulch for weed control', 'Train vines in one direction', 'Place straw under fruits to prevent soil contact', 'Thump test - ripe fruits sound hollow'],
+    priceHistory: [
+      { month: 'Jan', price: 800, year: 2024 },
+      { month: 'Feb', price: 1000, year: 2024 },
+      { month: 'Mar', price: 1400, year: 2024 },
+      { month: 'Apr', price: 1800, year: 2024 },
+      { month: 'May', price: 1200, year: 2024 },
+      { month: 'Jun', price: 900, year: 2024 },
+      { month: 'Jul', price: 700, year: 2024 },
+      { month: 'Aug', price: 750, year: 2024 },
+      { month: 'Sep', price: 800, year: 2024 },
+      { month: 'Oct', price: 850, year: 2024 },
+      { month: 'Nov', price: 900, year: 2024 },
+      { month: 'Dec', price: 950, year: 2024 },
+    ],
+    priceUnit: 'per quintal',
   },
   {
     id: '9',
@@ -350,7 +478,22 @@ export const cropsData: Crop[] = [
       { stage: 'Grand growth', frequency: 'Every 7-10 days', method: 'Furrow', tips: 'Maximum water requirement' },
       { stage: 'Maturity', frequency: 'Every 15-20 days', method: 'Reduce irrigation', tips: 'Withhold water before harvest' }
     ],
-    tips: ['Use sett treatment with fungicide before planting', 'Maintain recommended spacing for air circulation', 'Practice trash mulching for moisture retention', 'Harvest at peak maturity for maximum sugar recovery']
+    tips: ['Use sett treatment with fungicide before planting', 'Maintain recommended spacing for air circulation', 'Practice trash mulching for moisture retention', 'Harvest at peak maturity for maximum sugar recovery'],
+    priceHistory: [
+      { month: 'Jan', price: 3100, year: 2024 },
+      { month: 'Feb', price: 3200, year: 2024 },
+      { month: 'Mar', price: 3300, year: 2024 },
+      { month: 'Apr', price: 3250, year: 2024 },
+      { month: 'May', price: 3150, year: 2024 },
+      { month: 'Jun', price: 3050, year: 2024 },
+      { month: 'Jul', price: 2950, year: 2024 },
+      { month: 'Aug', price: 3000, year: 2024 },
+      { month: 'Sep', price: 3100, year: 2024 },
+      { month: 'Oct', price: 3200, year: 2024 },
+      { month: 'Nov', price: 3350, year: 2024 },
+      { month: 'Dec', price: 3400, year: 2024 },
+    ],
+    priceUnit: 'per quintal',
   },
   {
     id: '10',
@@ -385,7 +528,22 @@ export const cropsData: Crop[] = [
       { stage: 'Flowering', frequency: 'Every 2-3 days', method: 'Drip', tips: 'Avoid water stress' },
       { stage: 'Fruiting', frequency: 'Every 2-3 days', method: 'Drip with fertigation', tips: 'Consistent moisture prevents cracking' }
     ],
-    tips: ['Use staking or trellis system for support', 'Prune suckers for determinate varieties', 'Apply calcium to prevent blossom end rot', 'Harvest at color-break stage for distant markets']
+    tips: ['Use staking or trellis system for support', 'Prune suckers for determinate varieties', 'Apply calcium to prevent blossom end rot', 'Harvest at color-break stage for distant markets'],
+    priceHistory: [
+      { month: 'Jan', price: 2500, year: 2024 },
+      { month: 'Feb', price: 3000, year: 2024 },
+      { month: 'Mar', price: 2200, year: 2024 },
+      { month: 'Apr', price: 1800, year: 2024 },
+      { month: 'May', price: 2000, year: 2024 },
+      { month: 'Jun', price: 2500, year: 2024 },
+      { month: 'Jul', price: 3200, year: 2024 },
+      { month: 'Aug', price: 3800, year: 2024 },
+      { month: 'Sep', price: 3500, year: 2024 },
+      { month: 'Oct', price: 2800, year: 2024 },
+      { month: 'Nov', price: 2200, year: 2024 },
+      { month: 'Dec', price: 2400, year: 2024 },
+    ],
+    priceUnit: 'per quintal',
   },
   {
     id: '11',
@@ -420,7 +578,22 @@ export const cropsData: Crop[] = [
       { stage: 'Berry development', frequency: 'Daily', method: 'Drip with mulch', tips: 'Critical for size' },
       { stage: 'Ripening', frequency: 'Reduce by 30%', method: 'Drip', tips: 'Improves sugar content' }
     ],
-    tips: ['Follow proper pruning schedule for your region', 'Use GA3 and CPPU for berry sizing', 'Maintain proper canopy management', 'Pre-cooling is essential for export quality']
+    tips: ['Follow proper pruning schedule for your region', 'Use GA3 and CPPU for berry sizing', 'Maintain proper canopy management', 'Pre-cooling is essential for export quality'],
+    priceHistory: [
+      { month: 'Jan', price: 4500, year: 2024 },
+      { month: 'Feb', price: 5000, year: 2024 },
+      { month: 'Mar', price: 6500, year: 2024 },
+      { month: 'Apr', price: 7500, year: 2024 },
+      { month: 'May', price: 5500, year: 2024 },
+      { month: 'Jun', price: 4000, year: 2024 },
+      { month: 'Jul', price: 3500, year: 2024 },
+      { month: 'Aug', price: 3800, year: 2024 },
+      { month: 'Sep', price: 4200, year: 2024 },
+      { month: 'Oct', price: 4800, year: 2024 },
+      { month: 'Nov', price: 5200, year: 2024 },
+      { month: 'Dec', price: 4800, year: 2024 },
+    ],
+    priceUnit: 'per kg',
   },
   {
     id: '12',
@@ -455,6 +628,21 @@ export const cropsData: Crop[] = [
       { stage: 'Flowering', frequency: 'Every 4-5 days', method: 'Drip', tips: 'Maintain moisture' },
       { stage: 'Fruit development', frequency: 'Every 3-4 days', method: 'Drip', tips: 'Consistent for fruit size' }
     ],
-    tips: ['Follow Mrig/Hasta bahar based on water availability', 'Fruit bagging prevents sunburn and pest damage', 'Proper stress management for quality bahar', 'Grade fruits for better market price']
+    tips: ['Follow Mrig/Hasta bahar based on water availability', 'Fruit bagging prevents sunburn and pest damage', 'Proper stress management for quality bahar', 'Grade fruits for better market price'],
+    priceHistory: [
+      { month: 'Jan', price: 8500, year: 2024 },
+      { month: 'Feb', price: 9200, year: 2024 },
+      { month: 'Mar', price: 8800, year: 2024 },
+      { month: 'Apr', price: 7500, year: 2024 },
+      { month: 'May', price: 6800, year: 2024 },
+      { month: 'Jun', price: 6200, year: 2024 },
+      { month: 'Jul', price: 5800, year: 2024 },
+      { month: 'Aug', price: 6500, year: 2024 },
+      { month: 'Sep', price: 7200, year: 2024 },
+      { month: 'Oct', price: 8000, year: 2024 },
+      { month: 'Nov', price: 8800, year: 2024 },
+      { month: 'Dec', price: 9000, year: 2024 },
+    ],
+    priceUnit: 'per quintal',
   }
 ];
